@@ -17,22 +17,11 @@
   Copyright 2015 École Polytechnique de Montréal & Tata Consultancy Services.
  */
 
-import org.slf4j.{Logger, LoggerFactory}
+package ca.polymtl.gigl.casi
 
-/**
- * Simple logging trait to mix in. A replacement over typesafe's that just gives you a plain slf4j logger wrapper and moves on
- * @author Marc-André Laverdière-Papineau
- */
-trait Logging {
+import org.slf4j.Logger
 
-  /**
-   * The logger object.
-   */
-  lazy protected val logger : LazyLogger = new LazyLogger(LoggerFactory.getLogger(loggerName()))
 
-  def loggerName() : String = getClass.getName
-
-}
 
 /**
  * Very lazy logger. All parameters are passed lazily and will be evaluated only if the log
@@ -60,7 +49,7 @@ class LazyLogger(underlying : Logger) {
   def error(msg : String, arg1 : => Any, arg2 : => Any, arg3 : => Any, arg4 : => Any, arg5 : => Any, arg6 : => Any, arg7 : => Any, arg8 : => Any, arg9 : => Any, arg10 : => Any, arg11 : => Any, arg12 : => Any, arg13 : => Any) = if (underlying.isErrorEnabled()) underlying.error(msg, toStringVarargs(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13) :_*)
   def error(msg : String, arg1 : => Any, arg2 : => Any, arg3 : => Any, arg4 : => Any, arg5 : => Any, arg6 : => Any, arg7 : => Any, arg8 : => Any, arg9 : => Any, arg10 : => Any, arg11 : => Any, arg12 : => Any, arg13 : => Any, arg14 : => Any) = if (underlying.isErrorEnabled()) underlying.error(msg, toStringVarargs(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14) :_*)
   def error(msg : String, arg1 : => Any, arg2 : => Any, arg3 : => Any, arg4 : => Any, arg5 : => Any, arg6 : => Any, arg7 : => Any, arg8 : => Any, arg9 : => Any, arg10 : => Any, arg11 : => Any, arg12 : => Any, arg13 : => Any, arg14 : => Any, arg15 : => Any) = if (underlying.isErrorEnabled()) underlying.error(msg, toStringVarargs(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15) :_*)
-  
+
   def warn(msg : String) = underlying.warn(msg)
   def warn(msg : String, t : Throwable) = underlying.warn(msg, t)
   def warn(msg : String, arg1 : => Any) = if (underlying.isWarnEnabled()) underlying.warn(msg, toStringVarargs(arg1) :_*)
